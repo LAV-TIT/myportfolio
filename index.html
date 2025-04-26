@@ -133,7 +133,7 @@
                 <a href="#cv" class="menu-item px-2 py-1">CV</a>
 
                 <!-- Dark Mode Toggle -->
-                <button class="theme-toggle p-2 rounded-full focus:outline-none">
+                <button class="theme-toggle size-10 p-2 rounded-full focus:outline-none">
                     <i class="fas fa-moon"></i>
                 </button>
             </nav>
@@ -919,7 +919,7 @@
         const html = document.querySelector('html');
         themeToggle.forEach(e => {
             e.addEventListener('click', () => {
-                const icon = e.querySelector('i'); 
+                const icon = e.querySelector('i');
                 const isDark = html.classList.contains('dark');
                 if (icon) {
                     // Toggle between fa-sun and fa-moon
