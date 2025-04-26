@@ -134,8 +134,7 @@
 
                 <!-- Dark Mode Toggle -->
                 <button class="theme-toggle p-2 rounded-full focus:outline-none">
-                    <i class="fas fa-moon dark:hidden"></i>
-                    <i class="fas fa-sun hidden dark:block"></i>
+                    <i class="fas fa-moon"></i>
                 </button>
             </nav>
 
@@ -181,8 +180,7 @@
                 <a href="#cv" class="text-2xl font-medium menu-item py-2">CV</a>
             </nav>
             <button class="theme-toggle mb-3 p-2 rounded-full focus:outline-none">
-                <i class="fas fa-moon dark:hidden"></i>
-                <i class="fas fa-sun hidden dark:block"></i>
+                <i class="fas fa-moon"></i>
             </button>
             <div class="mt-auto pt-6 border-t border-gray-200 dark:border-gray-700">
                 <div class="flex justify-center space-x-4">
@@ -921,6 +919,18 @@
         const html = document.querySelector('html');
         themeToggle.forEach(e => {
             e.addEventListener('click', () => {
+                const icon = e.querySelector('i'); 
+                const isDark = html.classList.contains('dark');
+                if (icon) {
+                    // Toggle between fa-sun and fa-moon
+                    if (isDark) {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                    } else {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                    }
+                }
                 html.classList.toggle('dark');
                 localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
             })
