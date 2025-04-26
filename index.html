@@ -96,6 +96,7 @@
                 opacity: 0;
             }
         }
+
         .custom-cursor {
             position: fixed;
             width: 20px;
@@ -132,7 +133,7 @@
                 <a href="#cv" class="menu-item px-2 py-1">CV</a>
 
                 <!-- Dark Mode Toggle -->
-                <button id="theme-toggle" class="p-2 rounded-full focus:outline-none">
+                <button class="theme-toggle p-2 rounded-full focus:outline-none">
                     <i class="fas fa-moon dark:hidden"></i>
                     <i class="fas fa-sun hidden dark:block"></i>
                 </button>
@@ -179,7 +180,10 @@
                 <a href="#contact" class="text-2xl font-medium menu-item py-2">Contact</a>
                 <a href="#cv" class="text-2xl font-medium menu-item py-2">CV</a>
             </nav>
-
+            <button class="theme-toggle mb-3 p-2 rounded-full focus:outline-none">
+                <i class="fas fa-moon dark:hidden"></i>
+                <i class="fas fa-sun hidden dark:block"></i>
+            </button>
             <div class="mt-auto pt-6 border-t border-gray-200 dark:border-gray-700">
                 <div class="flex justify-center space-x-4">
                     <a href="#" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
@@ -277,20 +281,15 @@
                             <p class="text-gray-600 dark:text-gray-400 mb-4">Building responsive and interactive user
                                 interfaces with modern frameworks.</p>
                             <div class="flex flex-wrap gap-2">
-                                <span
-                                    class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 
+                                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 
                                     rounded-full text-sm">HTML</span>
-                                    <span
-                                    class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 
+                                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 
                                     rounded-full text-sm">CSS</span>
-                                <span
-                                    class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 
+                                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 
                                     rounded-full text-sm">Bootstrap</span>
-                                    <span
-                                    class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 
+                                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 
                                     rounded-full text-sm">Tailwind</span>
-                                <span
-                                    class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 
+                                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 
                                     rounded-full text-sm">React</span>
                                 <span
                                     class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">Vue</span>
@@ -918,16 +917,18 @@
         });
 
         // Dark Mode Toggle
-        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggle = document.querySelectorAll('.theme-toggle');
         const html = document.querySelector('html');
-
-        themeToggle.addEventListener('click', () => {
-            html.classList.toggle('dark');
-            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        themeToggle.forEach(e => {
+            e.addEventListener('click', () => {
+                html.classList.toggle('dark');
+                localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+            })
         });
 
         // Check for saved theme preference
-        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        if (localStorage.getItem('theme') === 'dark' ||
+            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             html.classList.add('dark');
         } else {
             html.classList.remove('dark');
@@ -1029,35 +1030,35 @@
             }, 100);
         });
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Custom cursor
             const cursor = document.querySelector('.custom-cursor');
-            
+
             if (cursor) {
                 document.addEventListener('mousemove', (e) => {
                     cursor.style.left = e.clientX + 'px';
                     cursor.style.top = e.clientY + 'px';
                 });
-                
+
                 document.addEventListener('mousedown', () => {
                     cursor.style.width = '15px';
                     cursor.style.height = '15px';
                     cursor.style.backgroundColor = 'rgba(99, 102, 241, 0.7)';
                 });
-                
+
                 document.addEventListener('mouseup', () => {
                     cursor.style.width = '20px';
                     cursor.style.height = '20px';
                     cursor.style.backgroundColor = 'rgba(99, 102, 241, 0.5)';
                 });
-                
+
                 document.querySelectorAll('a, button, input, textarea, .hamburger, .theme-switch').forEach(item => {
                     item.addEventListener('mouseenter', () => {
                         cursor.style.width = '40px';
                         cursor.style.height = '40px';
                         cursor.style.backgroundColor = 'rgba(99, 102, 241, 0.2)';
                     });
-                    
+
                     item.addEventListener('mouseleave', () => {
                         cursor.style.width = '20px';
                         cursor.style.height = '20px';
