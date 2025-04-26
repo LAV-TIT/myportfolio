@@ -848,7 +848,7 @@
             </div>
         </div>
     </footer>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // Mobile Menu Toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -1077,6 +1077,12 @@
                 });
             }
         });
+        Swal.fire({
+            title: "<strong>My Portfolio</strong>",
+            icon: "info",
+            html: `<b>My Website under construction</b>`,
+            showCloseButton: true,
+        });     
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
