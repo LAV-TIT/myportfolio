@@ -96,13 +96,26 @@
                 opacity: 0;
             }
         }
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgba(99, 102, 241, 0.5);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+            mix-blend-mode: difference;
+        }
     </style>
 </head>
 
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+    <div class="custom-cursor hidden md:block"></div>
     <!-- Header with Navigation -->
     <header class="fixed w-full z-50 transition-all duration-300" id="main-header">
-        <div class="container mx-auto px-20 py-3 flex justify-between items-center">
+        <div class="container mx-auto px-4 lg:px-20 py-3 flex justify-between items-center">
             <!-- Logo -->
             <a href="#home"
                 class="text-2xl font-bold text-primary-light dark:text-primary-dark transition-colors duration-300">
@@ -198,9 +211,9 @@
                 <div class="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-10 dark:opacity-5"></div>
             </div>
 
-            <div class="container mx-auto lg:px-40 py-20 relative z-10">
-                <div class="flex lg:flex-row text-center items-center">
-                    <div class="md:w-1/2 mb-10 md:mb-0 animate-slide-down">
+            <div class="container mx-auto px-4 lg:px-40 py-20 relative z-10">
+                <div class="flex flex-wrap justify-center flex-column md:flex-row text-center items-center">
+                    <div class="md:w-1/2 mb-10 md:mb-0 animate-slide-down order-2 lg:order-1">
                         <h1 class="text-4xl md:text-6xl font-bold mb-4">Hi, I'm <span
                                 class="text-primary-light dark:text-primary-dark">TIT</span></h1>
                         <h2 class="text-2xl md:text-3xl font-medium mb-6 text-secondary-light dark:text-secondary-dark">
@@ -218,7 +231,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="md:w-1/2 flex justify-center animate-slide-in-right">
+                    <div class="md:w-1/2 mb-8 md:mb-0 flex justify-center animate-slide-in-right order-1 lg:order-2">
                         <div class="relative w-64 h-64 md:w-80 md:h-80">
                             <div
                                 class="absolute inset-0 bg-primary-light dark:bg-primary-dark rounded-full opacity-20 blur-xl">
@@ -243,7 +256,7 @@
 
         <!-- Skills Section -->
         <section id="skills" class="py-20 bg-gray-50 dark:bg-gray-800 page-transition" style="animation-delay: 0.2s;">
-            <div class="container mx-auto px-20">
+            <div class="container mx-auto px-4 lg:px-20">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold mb-4">My <span
                             class="text-primary-light dark:text-primary-dark">Skills</span></h2>
@@ -346,7 +359,7 @@
 
         <!-- Events Section -->
         <section id="events" class="py-20 page-transition" style="animation-delay: 0.3s;">
-            <div class="container mx-auto px-20">
+            <div class="container mx-auto px-4 lg:px-20">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold mb-4">Recent <span
                             class="text-primary-light dark:text-primary-dark">Events</span></h2>
@@ -451,7 +464,7 @@
 
         <!-- About Section -->
         <section id="about" class=" py-20 bg-gray-50 dark:bg-gray-800 page-transition" style="animation-delay: 0.4s;">
-            <div class="container mx-auto px-20">
+            <div class="container mx-auto px-4 lg:px-20">
                 <div class="flex flex-col md:flex-row items-center">
                     <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
                         <div class="relative">
@@ -510,7 +523,7 @@
 
         <!-- Contact Section -->
         <section id="contact" class=" py-20 page-transition" style="animation-delay: 0.5s;">
-            <div class="container mx-auto px-20">
+            <div class="container mx-auto px-4 lg:px-20">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold mb-4">Get In <span
                             class="text-primary-light dark:text-primary-dark">Touch</span></h2>
@@ -624,7 +637,7 @@
 
         <!-- CV Section -->
         <section id="cv" class=" py-20 bg-gray-50 dark:bg-gray-800 page-transition" style="animation-delay: 0.6s;">
-            <div class="container mx-auto px-20">
+            <div class="container mx-auto px-4 lg:px-20">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold mb-4">My <span
                             class="text-primary-light dark:text-primary-dark">Resume</span></h2>
@@ -810,7 +823,7 @@
 
     <!-- Footer -->
     <footer class="bg-gray-100 dark:bg-gray-800 py-8">
-        <div class="container mx-auto px-20">
+        <div class="container mx-auto px-4 lg:px-20">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-4 md:mb-0">
                     <p class="text-gray-600 dark:text-gray-400">&copy; 2025 Portfolio. All rights reserved. By Dev TIT
@@ -1014,6 +1027,44 @@
                     element.style.opacity = '1';
                 });
             }, 100);
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Custom cursor
+            const cursor = document.querySelector('.custom-cursor');
+            
+            if (cursor) {
+                document.addEventListener('mousemove', (e) => {
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
+                });
+                
+                document.addEventListener('mousedown', () => {
+                    cursor.style.width = '15px';
+                    cursor.style.height = '15px';
+                    cursor.style.backgroundColor = 'rgba(99, 102, 241, 0.7)';
+                });
+                
+                document.addEventListener('mouseup', () => {
+                    cursor.style.width = '20px';
+                    cursor.style.height = '20px';
+                    cursor.style.backgroundColor = 'rgba(99, 102, 241, 0.5)';
+                });
+                
+                document.querySelectorAll('a, button, input, textarea, .hamburger, .theme-switch').forEach(item => {
+                    item.addEventListener('mouseenter', () => {
+                        cursor.style.width = '40px';
+                        cursor.style.height = '40px';
+                        cursor.style.backgroundColor = 'rgba(99, 102, 241, 0.2)';
+                    });
+                    
+                    item.addEventListener('mouseleave', () => {
+                        cursor.style.width = '20px';
+                        cursor.style.height = '20px';
+                        cursor.style.backgroundColor = 'rgba(99, 102, 241, 0.5)';
+                    });
+                });
+            }
         });
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
